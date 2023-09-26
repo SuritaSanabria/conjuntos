@@ -23,9 +23,40 @@
 {% endblock content %}
 
 {% block tabla %}
-{% for recaudo in elementos %}
-    <p>
-        {{recaudo.usuario}}-{{recaudo.valor}}
-    </p>
-{% endfor %}
+{% if elementos %}
+<div class="table-responsive">
+  <table class="table table-hover trecaudo-nowrap">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Fecha</th>
+        <th>Usuario</th>
+        <th>Inmuebles</th>
+        <th>Valor</th>
+        <th>Deuda</th>
+        <th>Documento</th>
+        <th>Nota</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for recaudo in elementos %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>
+          <a href="{% url 'recaudos_edit' recaudo.id %}">{{ recaudo.fecha|date:"d/m/Y" }}</a>
+        </td>
+        <td>{{ recaudo.usuario }}</td>
+        <td>{{ recaudo.Inmuebles }}</td>
+        <td>{{ recaudo.valor }}</td>
+        <td>{{ recaudo.deuda }}</td>
+        <td>{{ recaudo.documento }}</td>
+        <td>{{ recaudo.nota }}</td>
+        <td>{{ recaudo.estado }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endif %}
 {% endblock tabla %}

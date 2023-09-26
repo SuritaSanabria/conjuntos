@@ -27,6 +27,7 @@
 {% endblock content %}
 
 {% block tabla %}
+{% if elementos %}
 <div class="table-responsive">
   <table class="table table-hover tgasto-nowrap">
     <thead>
@@ -59,5 +60,5 @@
     
   </table>
 </div>
-
+{% endif %}
 {% endblock tabla %}

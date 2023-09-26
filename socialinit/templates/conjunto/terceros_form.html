@@ -23,7 +23,35 @@
 {% endblock content %}
 
 {% block tabla %}
-{% for tipo in elementos %}
-  <p>{{ tipo.numDoc }}</p>
-{% endfor %}
+{% if elementos %}
+<div class="table-responsive">
+  <table class="table table-hover ttercero-nowrap">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Tipo Documento</th>
+        <th>Numero Documento</th>
+        <th>Nombres</th>
+        <th>apellidos</th>
+        <th>Telefono Movil</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for tercero in elementos %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>
+          <a href="{% url 'terceros_edit' tercero.id %}">{{ tercero.tipDocumento }}</a>
+        </td>
+        <td>{{ tercero.numDoc }}</td>
+        <td>{{ tercero.nombres}}</td>
+        <td>{{ tercero.apellidos }}</td>
+        <td>{{ tercero.telmov }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endif %}
 {% endblock tabla %}
+

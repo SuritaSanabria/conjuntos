@@ -28,6 +28,7 @@
 {% endblock content %}
 
 {% block tabla %}
+{% if elementos %}
 <div class="table-responsive">
   <table class="table table-hover tinmueble-nowrap">
     <thead>
@@ -54,6 +55,6 @@
     </tbody>
     
   </table>
-</div>
+</div>{% endif %}
 
 {% endblock tabla %}

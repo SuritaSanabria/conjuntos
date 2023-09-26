@@ -1,9 +1,9 @@
 {% extends "general.html" %}
 
-{% block tituloHeader %} Tarifas {% endblock tituloHeader %}
+{% block tituloHeader %} Tar Inm {% endblock tituloHeader %}
 
-{% block titulo %} Tarifas {% endblock titulo %}
-{% block tituloTargeta %} Tarifas {% endblock tituloTargeta %}
+{% block titulo %} Tar Inm {% endblock titulo %}
+{% block tituloTargeta %} Tar Inm {% endblock tituloTargeta %}
 
 {% block content %}
   <form method="post">
@@ -14,7 +14,12 @@
     <div class="form-group">
       <strong>{{ field.label_tag }}</strong>
       <br />
-      {{ field }}
+      {% if field.name == 'fechainicio' or field.name == 'fechafin' %}
+        
+        <input type="date" name="{{ field.name }}" value="{{ field.value }}">
+      {% else %}
+        {{ field }}
+      {% endif %}
     </div>
     {% endfor %}
 
@@ -23,7 +28,34 @@
 {% endblock content %}
 
 {% block tabla %}
-{% for tarifa in elementos %}
-  <p>{{tarifa.tarifa}} - {{tarifa.usuario}}</p>
-{% endfor %}
+{% if elementos %}
+<div class="table-responsive">
+  <table class="table table-hover trecaudo-nowrap">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Inmueble</th>
+        <th>Usuario</th>
+        <th>Tarifa</th>
+        <th>Fecha Inicio</th>
+        <th>Fecha Fin</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for recaudo in elementos %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>
+          <a href="{% url 'tar_inm_edit' recaudo.id %}">{{ recaudo.id_inmueble }}</a>
+        </td>
+        <td>{{ recaudo.usuario }}</td>
+        <td>{{ recaudo.tarifa }}</td>
+        <td>{{ recaudo.fechainicio|date:"d/m/Y" }}</td>
+        <td>{{ recaudo.fechafin|date:"d/m/Y" }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endif %}
 {% endblock tabla %}

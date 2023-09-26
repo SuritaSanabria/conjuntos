@@ -23,7 +23,34 @@
 {% endblock content %}
 
 {% block tabla %}
-{% for tipo in elementos %}
-  <p>{{ tipo.detalle }}</p>
-{% endfor %}
+{% if elementos %}
+<div class="table-responsive">
+  <table class="table table-hover ttarifa-nowrap">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Detalle</th>
+        <th>Valor</th>
+        <th>Int Mor</th>
+        <th>Imprevistos</th>
+        <th>Estados</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for tarifa in elementos %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>
+          <a href="{% url 'tarifas_edit' tarifa.id %}">{{ tarifa.detalle }}</a>
+        </td>
+        <td>{{ tarifa.valor }}</td>
+        <td>{{ tarifa.intmor }}</td>
+        <td>{{ tarifa.imprevistos}}</td>
+        <td>{{ tarifa.estados }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endif %}
 {% endblock tabla %}
