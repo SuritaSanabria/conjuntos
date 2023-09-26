@@ -1,9 +1,11 @@
+{% extends "base.html" %}
+
 {% load i18n %}
 {% load account socialaccount %}
 
 {% block head_title %}{% trans "Sign In" %}{% endblock %}
 
-{% block content %}
+{% block entrada %}
 {% if process == "connect" %}
 <h1>{% blocktrans with provider.name as provider %}Connect {{ provider }}{% endblocktrans %}</h1>
 <p>{% blocktrans with provider.name as provider %}You are about to connect a new third-party account from {{ provider }}.{% endblocktrans %}</p>
@@ -19,4 +21,4 @@
   <button type="submit">{% trans "Continue" %}</button>
   <a href="{%url 'account_login'%}">inicia sesion con tu correo u contraseña</a>
 </form>
-{% endblock %}
+{% endblock entrada%}
