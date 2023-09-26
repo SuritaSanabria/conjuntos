@@ -1,0 +1,66 @@
+
+{% extends "general.html" %}
+
+{% block tituloHeader %} Notas {% endblock tituloHeader %}
+
+{% block titulo %} Notas {% endblock titulo %}
+{% block tituloTargeta %} Notas {% endblock tituloTargeta %}
+
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+
+    {% for field in form %}
+    <div class="form-group">
+      <strong>{{ field.label_tag }}</strong>
+      <br />
+      {% if field.name == 'fecha' %}
+        <input type="date" name="{{ field.name }}" value="{{ field.value }}">
+      {% else %}
+        {{ field }}
+      {% endif %}
+    </div>
+    {% endfor %}
+
+    <input type="submit" value="Guardar" class="btn btn-primary">
+  </form>
+{% endblock content %}
+
+{% block tabla %}
+{% if elementos %}
+<div class="table-responsive">
+  <table class="table table-hover tnota-nowrap">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Novedad</th>
+        <th>Inmueble</th>
+        <th>Fecha</th>
+        <th>Usuario</th>
+        <th>Detalle</th>
+        
+
+      </tr>
+    </thead>
+    <tbody>
+      {% for nota in elementos %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>
+          <a href="{% url 'notas_edit' nota.id %}">{{ nota.novedad }}</a>
+        </td>
+        <td>{{ nota.inmueble}}</td> 
+        <td>{{ nota.fecha|date:"d/m/Y" }}</td>
+        <td>{{ nota.usuario}}</td> 
+        <td>{{ nota.detalle}}</td> 
+
+
+      </tr>
+      {% endfor %}
+    </tbody>
+    
+  </table>
+</div>
+{% endif %}
+{% endblock tabla %}

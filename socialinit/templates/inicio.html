@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% load socialaccount %}
+{% providers_media_js %}
+{% load i18n %}
+{% block tituloHeader %}
+Inicio
+{% endblock tituloHeader %}
+{% block entrada %}
+{% block login_block %}
+<section class="content">
+  {% if user.is_authenticated %}
+  <p>Estás autenticado como {{ user.username }}</p>
+  {% include 'inicio/datos.html' %}
+  {% else %}
+  <a href="{% provider_login_url 'google' %}">
+    Iniciar sesión
+  </a>
+  {% endif %}
+
+</section>
+{% endblock login_block %}
+{% endblock entrada %}

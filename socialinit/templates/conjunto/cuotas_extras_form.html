@@ -1,0 +1,59 @@
+{% extends "general.html" %}
+
+{% block tituloHeader %} Cuotas Extras {% endblock tituloHeader %}
+
+{% block titulo %} Cuotas Extras {% endblock titulo %}
+{% block tituloTargeta %} Cuotas Extras {% endblock tituloTargeta %}
+
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+
+    {% for field in form %}
+    <div class="form-group">
+      <strong>{{ field.label_tag }}</strong>
+      <br />
+      {% if field.name == 'fecha' %}
+        <input type="date" name="{{ field.name }}" value="{{ field.value }}">
+      {% else %}
+        {{ field }}
+      {% endif %}
+    </div>
+    {% endfor %}
+
+    <input type="submit" value="Guardar" class="btn btn-primary">
+  </form>
+{% endblock content %}
+
+{% block tabla %}
+<div class="table-responsive">
+  <table class="table table-hover text-nowrap">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Detalle</th>
+        <th>Valor</th>
+        <th>Estado</th>
+
+
+      </tr>
+    </thead>
+    <tbody>
+      {% for cuota in elementos %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>
+          <a href="{% url 'cuotas_extras_edit' cuota.id %}">{{ cuota.detalle }}</a>
+        </td>
+        <td>{{ cuota.valor }}</td>
+        <td>{{ cuota.estado }}</td>
+
+      </tr>
+      {% endfor %}
+    </tbody>
+    
+  </table>
+</div>
+
+{% endblock tabla %}

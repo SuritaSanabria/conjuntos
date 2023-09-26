@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!-- Main content -->
+{% block entrada %}
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <!-- left column -->
+      <div class="col-md-12 col-lg-6"> <!-- Usa col-md-12 para pantallas pequeñas y col-lg-6 para pantallas grandes -->
+        <!-- general form elements -->
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">
+              {% block tituloTargeta %}{% endblock tituloTargeta %}
+            </h3>
+          </div>
+          <!-- /.card-header -->
+          <!-- form start -->
+          <div class="card-body">{% block content %}{% endblock content %}</div>
+          <div class="table-responsive card-footer"> <!-- Agregar la clase table-responsive -->
+            <table class="table table-hover text-nowrap">
+              {% block tabla %}{% endblock tabla %}
+            </table>
+          </div>
+        </div>
+        <!-- /.card -->
+      </div>
+    </div>
+  </div>
+
+
+      
+  <!-- /.container-fluid -->
+</section>
+{% endblock entrada %}
+<!-- /.content-wrapper -->

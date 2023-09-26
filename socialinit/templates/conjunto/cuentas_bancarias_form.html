@@ -1,0 +1,72 @@
+{% extends "general.html" %}
+
+{% block tituloHeader %} Cuentas Bancarias {% endblock tituloHeader %}
+
+{% block titulo %} Cuentas Bancarias {% endblock titulo %}
+{% block tituloTargeta %} Cuentas Bancarias {% endblock tituloTargeta %}
+
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+
+    {% for field in form %}
+    <div class="form-group">
+      <strong>{{ field.label_tag }}</strong>
+      <br />
+      {% if field.name == 'fecha' %}
+        <input type="date" name="{{ field.name }}" value="{{ field.value }}">
+      {% else %}
+        {{ field }}
+      {% endif %}
+    </div>
+    {% endfor %}
+
+    <input type="submit" value="Guardar" class="btn btn-primary">
+  </form>
+{% endblock content %}
+
+{% block tabla %}
+{% if elementos %}
+<div class="table-responsive">
+  <table class="table table-hover text-nowrap">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Numero Cuenta</th>
+        <th>Banco</th>
+        <th>Tipo Cuenta</th>
+        <th>Pago</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for cuenta in elementos %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>
+           <a href="{% url 'cuentas_bancarias_edit' cuenta.id %}"> 
+            <p>
+              {{cuenta.numCue}}
+            </p>
+          </a>
+        </td>
+        <td>
+          {{cuenta.banco}}
+        </td>
+        <td>
+          {{cuenta.tipoCue}}
+        </td>
+        <td>
+          {{cuenta.pago}}
+        </td>
+        <td>
+          {{cuenta.estado}}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endif %}
+{% endblock tabla %}

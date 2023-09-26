@@ -1,0 +1,68 @@
+{% extends "general.html" %}
+
+{% block tituloHeader %} Facturas {% endblock tituloHeader %}
+
+{% block titulo %} Facturas {% endblock titulo %}
+{% block tituloTargeta %} Facturas {% endblock tituloTargeta %}
+
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+
+    {% for field in form %}
+    <div class="form-group">
+      <strong>{{ field.label_tag }}</strong>
+      <br />
+      {% if field.name == 'fecha' %}
+        <input type="date" name="{{ field.name }}" value="{{ field.value }}">
+      {% else %}
+        {{ field }}
+      {% endif %}
+    </div>
+    {% endfor %}
+
+    <input type="submit" value="Guardar" class="btn btn-primary">
+  </form>
+{% endblock content %}
+
+{% block tabla %}
+<div class="table-responsive">
+  <table class="table table-hover tfacturas-nowrap">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Numero</th>
+        <th>Fecha</th>
+        <th>Inmueble</th>
+        <th>Tercero</th>
+        <th>Descripcion</th>
+        <th>Valor</th>
+        <th>Fecha Pago</th>
+        <th>Impresion</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      {% for facturas in elementos %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>
+          <a href="{% url 'facturas_edit' facturas.id %}">{{ facturas.inmueble }}</a>
+        </td>
+        <td>{{ facturas.fecha|date:"d/m/Y" }}</td>
+        <td>{{ facturas.inmueble}}</td>
+        <td>{{ facturas.tercero}}</td>
+        <td>{{ facturas.descripcion}}</td>
+        <td>{{ facturas.valor}}</td>
+        <td>{{ facturas.fechaPago|date:"d/m/Y"}}</td>
+        <td>{{ facturas.valor}}</td>
+
+      </tr>
+      {% endfor %}
+    </tbody>
+    
+  </table>
+</div>
+
+{% endblock tabla %}

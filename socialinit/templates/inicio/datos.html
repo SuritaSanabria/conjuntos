@@ -1,0 +1,29 @@
+
+{% load static %}
+{% block entrada %}
+{% if messages %}
+        {% for message in messages %}
+        {% if user.emailVerificado %}
+        <p><strong>Correo Confirmado</p>
+        {% endif %}
+        {% endfor %}
+    {% endif %}
+    <h1>Datos del usuario</h1>
+    <p><strong>Nombre:</strong> {{ user.first_name }}</p>
+    <p><strong>Apellido:</strong> {{ user.last_name }}</p>
+    
+    {% if user.emailVerificado %}
+        <p><strong>Correo electrónico:</strong> {{ user.email }}</p>
+    {% else %}
+        <a href="{% url 'verificaremail' user.id %}"><p><strong>Correo electrónico:</strong> {{ user.email }}</p></a>
+    {% endif %}
+    
+    {% if user.esVerificadoTelefono %}
+        <p><strong>Teléfono:</strong> {{ user.telefono }}</p>
+    {% else %}
+        <a href="{% url 'editar_telefono' user.id %}"><p><strong>Teléfono:</strong> {{ user.telefono }}</p></a>
+    {% endif %}
+
+
+    <a href="{% url 'logout' %}">Cerrar sesión</a>
+{% endblock entrada %}

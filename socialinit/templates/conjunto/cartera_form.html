@@ -1,0 +1,78 @@
+{% extends "general.html" %}
+
+{% block tituloHeader %} Carteras {% endblock tituloHeader %}
+
+{% block titulo %} Carteras {% endblock titulo %}
+{% block tituloTargeta %} Carteras {% endblock tituloTargeta %}
+
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+
+    {% for field in form %}
+    <div class="form-group">
+      <strong>{{ field.label_tag }}</strong>
+      <br />
+      {% if field.name == 'fecha' %}
+        <input type="date" name="{{ field.name }}" value="{{ field.value }}">
+      {% else %}
+        {{ field }}
+      {% endif %}
+    </div>
+    {% endfor %}
+
+    <input type="submit" value="Guardar" class="btn btn-primary">
+  </form>
+{% endblock content %}
+
+{% block tabla %}
+{% if elementos %}
+<div class="table-responsive">
+  <table class="table table-hover text-nowrap">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Marca</th>
+        <th>Documento</th> <!-- Agrega el nombre del campo aquí -->
+        <th>Fecha</th>
+        <th>Detalle</th>
+        <th>Inmueble</th>
+        <th>Valor</th>
+        <th>Naturaleza</th>
+        <th>Docori</th>
+        <th>Docru</th>
+        <th>Macru</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for cartera in elementos %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>
+           <a href="{% url 'cartera_edit' cartera.id %}">
+            <p>
+              {{cartera.marca}}
+            </p>
+          </a> 
+        </td>
+        <td>
+          {{cartera.documento}} <!-- Agrega el nombre del campo aquí -->
+        </td>
+        <td>{{ cartera.fecha|date:"d/m/Y" }}</td>
+        <td>{{ cartera.detalle }}</td>
+        <td>{{ cartera.idInmueble }}</td>
+        <td>{{ cartera.valor }}</td>
+        <td>{{ cartera.naturaleza }}</td>
+        <td>{{ cartera.docori }}</td>
+        <td>{{ cartera.docru }}</td>
+        <td>{{ cartera.macru }}</td>
+        <td>{{ cartera.estado }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endif %}
+{% endblock tabla %}

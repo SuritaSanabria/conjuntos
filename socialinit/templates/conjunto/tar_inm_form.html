@@ -1,0 +1,29 @@
+{% extends "general.html" %}
+
+{% block tituloHeader %} Tarifas {% endblock tituloHeader %}
+
+{% block titulo %} Tarifas {% endblock titulo %}
+{% block tituloTargeta %} Tarifas {% endblock tituloTargeta %}
+
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+
+    {% for field in form %}
+    <div class="form-group">
+      <strong>{{ field.label_tag }}</strong>
+      <br />
+      {{ field }}
+    </div>
+    {% endfor %}
+
+    <input type="submit" value="Guardar" class="btn btn-primary">
+  </form>
+{% endblock content %}
+
+{% block tabla %}
+{% for tarifa in elementos %}
+  <p>{{tarifa.tarifa}} - {{tarifa.usuario}}</p>
+{% endfor %}
+{% endblock tabla %}

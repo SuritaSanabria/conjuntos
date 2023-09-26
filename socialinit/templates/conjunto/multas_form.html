@@ -1,0 +1,61 @@
+
+{% extends "general.html" %}
+
+{% block tituloHeader %} Multas {% endblock tituloHeader %}
+
+{% block titulo %} Multas {% endblock titulo %}
+{% block tituloTargeta %} Multas {% endblock tituloTargeta %}
+
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+
+    {% for field in form %}
+    <div class="form-group">
+      <strong>{{ field.label_tag }}</strong>
+      <br />
+      {{ field }}
+    </div>
+    {% endfor %}
+
+    <input type="submit" value="Guardar" class="btn btn-primary">
+  </form>
+{% endblock content %}
+
+{% block tabla %}
+<div class="table-responsive">
+  <table class="table table-hover tmulta-nowrap">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>motivo</th>
+        <th>Inmueble</th>
+        <th>Fecha</th>
+        <th>Usuario</th>
+        <th>valor</th>
+        
+
+      </tr>
+    </thead>
+    <tbody>
+      {% for multa in elementos %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>
+          <a href="{% url 'multas_edit' multa.id %}">{{ multa.motivo }}</a>
+        </td>
+        <td>{{ multa.inmueble}}</td> 
+        <td>{{ multa.fecha|date:"d/m/Y" }}</td>
+        <td>{{ multa.usuario}}</td> 
+        <td>{{ multa.valor}}</td> 
+
+
+      </tr>
+      {% endfor %}
+    </tbody>
+    
+  </table>
+</div>
+
+{% endblock tabla %}

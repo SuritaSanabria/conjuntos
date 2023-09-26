@@ -1,0 +1,68 @@
+
+{% extends "general.html" %}
+
+{% block tituloHeader %} Parametrizacion {% endblock tituloHeader %}
+
+{% block titulo %} Parametrizacion {% endblock titulo %}
+{% block tituloTargeta %} Parametrizacion {% endblock tituloTargeta %}
+
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+
+    {% for field in form %}
+    <div class="form-group">
+      <strong>{{ field.label_tag }}</strong>
+      <br />
+      {{ field }}
+    </div>
+    {% endfor %}
+
+    <input type="submit" value="Guardar" class="btn btn-primary">
+  </form>
+{% endblock content %}
+
+{% block tabla %}
+{% if elementos %}
+<div class="table-responsive">
+  <table class="table table-hover tparametro-nowrap">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Nit</th>
+        <th>Razsoc</th>
+        <th>Direccion</th>
+        <th>Ciudad</th>
+        <th>Telefono</th>
+        <th>Email</th>
+        <th>Plazo</th>
+        <th>Imprevisto</th>
+        <th>Intmor</th>
+        <th>Imagen</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for parametro in elementos %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>
+          <a href="{% url 'parametrizacion_edit' parametro.id %}">{{ parametro.nit }}</a>
+        </td>
+        <td>{{ parametro.razsoc }}</td>
+        <td>{{ parametro.direccion }}</td>
+        <td>{{ parametro.ciudad }}</td>
+        <td>{{ parametro.telefono }}</td>
+        <td>{{ parametro.email }}</td>
+        <td>{{ parametro.plazo }}</td>
+        <td>{{ parametro.imprevisto }}</td>
+        <td>{{ parametro.intmor }}</td>
+        <td>{{ parametro.imagen }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endif %}
+{% endblock tabla %}
+

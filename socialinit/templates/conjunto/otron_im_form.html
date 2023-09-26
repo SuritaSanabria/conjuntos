@@ -1,0 +1,56 @@
+
+{% extends "general.html" %}
+
+{% block tituloHeader %} Otro Inmueble {% endblock tituloHeader %}
+
+{% block titulo %} Otro Inmueble {% endblock titulo %}
+{% block tituloTargeta %} Otro Inmueble {% endblock tituloTargeta %}
+
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+
+    {% for field in form %}
+    <div class="form-group">
+      <strong>{{ field.label_tag }}</strong>
+      <br />
+      {{ field }}
+    </div>
+    {% endfor %}
+
+    <input type="submit" value="Guardar" class="btn btn-primary">
+  </form>
+{% endblock content %}
+
+{% block tabla %}
+{% if elementos %}
+<div class="table-responsive">
+  <table class="table table-hover totro_inm-nowrap">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Inmueble</th>
+        <th>Concepto</th>
+        <th>Fecha</th>
+        <th>Usuario</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for otro_inm in elementos %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>
+          <a href="{% url 'otron_im_edit' otro_inm.id %}">{{ otro_inm.inmueble }}</a>
+        </td>
+        <td>{{ otro_inm.concepto}}</td> 
+        <td>{{ otro_inm.fecha|date:"d/m/Y" }}</td>
+        
+        <td>{{ otro_inm.usuario}}</td> 
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endif %}
+{% endblock tabla %}

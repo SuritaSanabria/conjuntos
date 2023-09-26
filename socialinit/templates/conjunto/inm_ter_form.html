@@ -1,0 +1,64 @@
+
+{% extends "general.html" %}
+
+{% block tituloHeader %} Ingreso Tercero {% endblock tituloHeader %}
+
+{% block titulo %} Ingreso Tercero {% endblock titulo %}
+{% block tituloTargeta %} Ingreso Tercero {% endblock tituloTargeta %}
+
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+
+    {% for field in form %}
+    <div class="form-group">
+      <strong>{{ field.label_tag }}</strong>
+      <br />
+      {% if field.name == 'fecha' %}
+        <input type="date" name="{{ field.name }}" value="{{ field.value }}">
+      {% else %}
+        {{ field }}
+      {% endif %}
+    </div>
+    {% endfor %}
+
+    <input type="submit" value="Guardar" class="btn btn-primary">
+  </form>
+{% endblock content %}
+
+{% block tabla %}
+<div class="table-responsive">
+  <table class="table table-hover tinm_ter-nowrap">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Inmueble</th>
+        <th>Tercero</th>
+        <th>Relacion</th>
+        <th>Fecha</th>
+        <th>Estado</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      {% for inm_ter in elementos %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>
+          <a href="{% url 'inm_ter_edit' inm_ter.id %}">{{ inm_ter.inmueble }}</a>
+        </td>
+        <td>{{ inm_ter.tercero}}</td> 
+        <td>{{ inm_ter.relacion}}</td>
+        <td>{{ inm_ter.fecha|date:"d/m/Y" }}</td>
+        <td>{{ inm_ter.estado}}</td>
+        <td>{{ inm_ter.valor}}</td>
+
+      </tr>
+      {% endfor %}
+    </tbody>
+    
+  </table>
+</div>
+
+{% endblock tabla %}

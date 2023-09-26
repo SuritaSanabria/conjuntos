@@ -1,0 +1,10 @@
+{% block content %}
+  <h1>Enviaremos un mensaje a tu correo electrónico</h1>
+
+  <form method="post" action="{% url 'verificaremail' user_id=user_id %}">
+    {% csrf_token %}
+
+
+    <button type="submit" class="btn">Enviar</button>
+  </form>
+{% endblock content %}

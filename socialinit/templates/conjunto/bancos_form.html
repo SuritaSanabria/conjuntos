@@ -1,0 +1,60 @@
+{% extends "general.html" %}
+
+{% block tituloHeader %} Bancos {% endblock tituloHeader %}
+
+{% block titulo %} Bancos {% endblock titulo %}
+{% block tituloTargeta %} Bancos {% endblock tituloTargeta %}
+
+{% block content %}
+<form method="post">
+  {% csrf_token %}
+  {{ form.non_field_errors }}
+
+  {% for field in form %}
+  <div class="form-group">
+    <strong>{{ field.label_tag }}</strong>
+    <br />
+    {% if field.name == 'fecha' %}
+    <input type="date" name="{{ field.name }}" value="{{ field.value }}">
+    {% else %}
+    {{ field }}
+    {% endif %}
+  </div>
+  {% endfor %}
+
+  <input type="submit" value="Guardar" class="btn btn-primary">
+</form>
+{% endblock content %}
+
+{% block tabla %}
+{% if elementos %}
+<div class="table-responsive">
+  <table class="table table-hover text-nowrap">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Nombre</th>
+        <th>Cod</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for banco in elementos %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>
+          <a href="{% url 'bancos_edit' banco.codBanco %}">
+            <p>
+              {{banco.detalle}}
+            </p>
+          </a>
+        </td>
+        <td>
+          {{banco.codBanco}}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endif %}
+{% endblock tabla %}

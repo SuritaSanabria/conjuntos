@@ -1,0 +1,70 @@
+{% extends "general.html" %}
+
+{% block tituloHeader %} Detalle Recibo {% endblock tituloHeader %}
+
+{% block titulo %} Detalle Recibo {% endblock titulo %}
+{% block tituloTargeta %} Detalle Recibo {% endblock tituloTargeta %}
+
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+
+    {% for field in form %}
+    <div class="form-group">
+      <strong>{{ field.label_tag }}</strong>
+      <br />
+      {% if field.name == 'fecha' %}
+        <input type="date" name="{{ field.name }}" value="{{ field.value }}">
+      {% else %}
+        {{ field }}
+      {% endif %}
+    </div>
+    {% endfor %}
+
+    <input type="submit" value="Guardar" class="btn btn-primary">
+  </form>
+{% endblock content %}
+
+{% block tabla %}
+<div class="table-responsive">
+  <table class="table table-hover text-nowrap">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Recaudo</th>
+        <th>Valor</th>
+        <th>Secuencia</th>
+        <th>Pago</th>
+        <th>Cuenta</th>
+        <th>Numero</th>
+        <th>Banco</th>
+        <th>TipTar</th>
+        <th>NumAuth</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      {% for recibo in elementos %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>
+          <a href="{% url 'detalle_rec_edit' recibo.id %}">{{ recibo.recaudo }}</a>
+        </td>
+        <td>{{ recibo.valor }}</td>
+        <td>{{ recibo.secuencia }}</td>
+        <td>{{ recibo.pago }}</td>
+        <td>{{ recibo.cuenta }}</td>
+        <td>{{ recibo.numero }}</td>
+        <td>{{ recibo.banco }}</td>
+        <td>{{ recibo.tipTar }}</td>
+        <td>{{ recibo.numAuth }}</td>
+
+      </tr>
+      {% endfor %}
+    </tbody>
+    
+  </table>
+</div>
+
+{% endblock tabla %}

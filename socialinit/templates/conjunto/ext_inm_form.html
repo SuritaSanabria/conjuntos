@@ -1,0 +1,60 @@
+{% extends "general.html" %}
+
+{% block tituloHeader %} Ext Inm {% endblock tituloHeader %}
+
+{% block titulo %} Ext Inm {% endblock titulo %}
+{% block tituloTargeta %} Ext Inm {% endblock tituloTargeta %}
+
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+
+    {% for field in form %}
+    <div class="form-group">
+      <strong>{{ field.label_tag }}</strong>
+      <br />
+      {% if field.name == 'fecha' %}
+        <input type="date" name="{{ field.name }}" value="{{ field.value }}">
+      {% else %}
+        {{ field }}
+      {% endif %}
+    </div>
+    {% endfor %}
+
+    <input type="submit" value="Guardar" class="btn btn-primary">
+  </form>
+{% endblock content %}
+
+{% block tabla %}
+<div class="table-responsive">
+  <table class="table table-hover text-nowrap">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Detalle</th>
+        <th>Valor</th>
+        <th>Fecha</th>
+        <th>Fecha</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      {% for ext in elementos %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>
+          <a href="{% url 'ext_inm_edit' ext.id %}">{{ ext.inmueble }}</a>
+        </td>
+        <td>{{ ext.cuota_extra}}</td>
+        <td>{{ ext.fecha|date:"d/m/Y" }}</td>
+        <td>{{ ext.usuario}}</td>
+
+      </tr>
+      {% endfor %}
+    </tbody>
+    
+  </table>
+</div>
+
+{% endblock tabla %}

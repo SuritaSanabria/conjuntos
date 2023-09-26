@@ -1,0 +1,64 @@
+{% extends "general.html" %}
+
+{% block tituloHeader %} Auditorias {% endblock tituloHeader %}
+
+{% block titulo %} Auditorias {% endblock titulo %}
+{% block tituloTargeta %} Auditorias {% endblock tituloTargeta %}
+
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+
+    {% for field in form %}
+    <div class="form-group">
+      <strong>{{ field.label_tag }}</strong>
+      <br />
+      {% if field.name == 'fecha' %}
+        <input type="date" name="{{ field.name }}" value="{{ field.value }}">
+      {% else %}
+        {{ field }}
+      {% endif %}
+    </div>
+    {% endfor %}
+
+    <input type="submit" value="Guardar" class="btn btn-primary">
+  </form>
+{% endblock content %}
+
+{% block tabla %}
+
+
+    {% if elementos %}
+<div class="table-responsive">
+  <table class="table table-hover text-nowrap">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Sec</th>
+        <th>Usuario</th>
+        <th>Fecha</th>
+        <th>Hora</th>
+        <th>Tipo</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for auditoria in elementos %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>
+          <a href="{% url 'auditoria_edit' auditoria.id %}">{{ auditoria.sec }}</a>
+        </td>
+        <td>{{ auditoria.usuario }}</td>
+        <td>{{ auditoria.fecha|date:"d/m/Y" }}</td>
+        <td>{{ auditoria.hora }}</td>
+        <td>{{ auditoria.tipo }}</td>
+
+      </tr>
+      {% endfor %}
+    </tbody>
+    
+  </table>
+  {% endif %}
+</div>
+{% endblock tabla %}
