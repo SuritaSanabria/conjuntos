@@ -21,8 +21,3 @@ class TelefonoForm(forms.ModelForm):
         super(TelefonoForm, self).__init__(*args, **kwargs)
         self.fields['telefono'].label = 'Número de Teléfono'  # Personaliza la etiqueta del campo de teléfono
 
-# class ContrasenaForm(forms.ModelForm):
-#     class Meta:
-#         model = CustomUser  # Especifica el modelo al que pertenece el formulario
-#         fields = ['password1', 'password2']  # Lista los campos que deseas incluir en el formulario
-

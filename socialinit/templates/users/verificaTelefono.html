@@ -1,4 +1,6 @@
-{% block content %}
+{% extends "base.html" %}
+
+{% block entrada %}
 <h1>Fue enviado un mensaje a tu teléfono</h1>
 
 <form method="post" action="{% url 'verificartlf' user_id=user.id %}">
@@ -9,4 +11,4 @@
 
     <button type="submit" class="btn">Enviar</button>
 </form>
-{% endblock content %}
+{% endblock entrada %}

@@ -3,7 +3,7 @@
 
 {% block head_title %}{% trans "Signup" %}{% endblock %}
 
-{% block content %}
+{% block entrada %}
     <h2>{% trans "Sign Up" %}</h2>
 
 <p>{% blocktrans with provider_name=account.get_provider.name site_name=site.name %}You are about to use your {{provider_name}} account to login to
@@ -19,4 +19,4 @@
   <p>holaaa</p>
 </form>
 
-{% endblock %}
+{% endblock entrada%}

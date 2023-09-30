@@ -110,3 +110,18 @@ def verificarCorreo(request, user_id):
         token = generar_y_enviar_token(email)  # Genera el token si es necesario
 
     return render(request, 'users/verificarcorreo.html', {'user_id': user_id, 'correo':email})
+
+
+def editar_usuario(request, usuario_id):
+    usuario = get_object_or_404(CustomUser, pk=usuario_id)
+
+    if request.method == 'POST':
+        form = CustomUserForm(request.POST, instance=usuario)
+        if form.is_valid():
+            form.save()
+            # Redirige a donde quieras después de guardar los cambios
+            return redirect('nombre_de_la_vista')
+    else:
+        form = CustomUserForm(instance=usuario)
+
+    return render(request, 'editar_usuario.html', {'form': form})

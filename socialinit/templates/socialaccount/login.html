@@ -18,7 +18,7 @@
 <form method="post">
   {% csrf_token %}
   <input type="hidden" name="next" value="{% url 'account_set_password' %}">
-  <button type="submit">{% trans "Continue" %}</button>
-  <a href="{%url 'account_login'%}">inicia sesion con tu correo u contraseña</a>
+  <button type="submit" class="btn btn-primary">{% trans "Continue" %}</button>
+  <a href="{%url 'account_login'%}">inicia sesion con tu correo y contraseña</a>
 </form>
 {% endblock entrada%}
