@@ -5,12 +5,12 @@ from .models import CustomUser  # Importa el modelo CustomUser
 class CustomUserForm(forms.ModelForm):
     class Meta:
         model = CustomUser
-        fields = ['username', 'first_name', 'last_name', 'email', 'telefono', 'document']  # Lista los campos que deseas incluir en el formulario
+        fields = ['username', 'first_name', 'last_name', 'email', 'telefono', 'document','esResidente', 'direccion']  # Lista los campos que deseas incluir en el formulario
 
 class CustomUserRegistrationForm(UserCreationForm):
     class Meta:
         model = CustomUser
-        fields = ['username', 'password1', 'password2', 'first_name', 'last_name', 'email', 'telefono', 'document']
+        fields = ['username', 'password1', 'password2', 'first_name', 'last_name', 'email', 'telefono', 'document', 'esResidente', 'direccion']
 
 class TelefonoForm(forms.ModelForm):
     class Meta:

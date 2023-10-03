@@ -6,6 +6,7 @@
 {% block tituloTargeta %} Auditorias {% endblock tituloTargeta %}
 
 {% block content %}
+  {% if not user.esResidente %}
   <form method="post">
     {% csrf_token %}
     {{ form.non_field_errors }}
@@ -24,41 +25,43 @@
 
     <input type="submit" value="Guardar" class="btn btn-primary">
   </form>
+  {% endif %}
 {% endblock content %}
 
-{% block tabla %}
-
-
-    {% if elementos %}
+{{% block tabla %}
 <div class="table-responsive">
-  <table class="table table-hover text-nowrap">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Sec</th>
-        <th>Usuario</th>
-        <th>Fecha</th>
-        <th>Hora</th>
-        <th>Tipo</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for auditoria in elementos %}
-      <tr>
-        <td>{{ forloop.counter }}</td>
-        <td>
-          <a href="{% url 'auditoria_edit' auditoria.id %}">{{ auditoria.sec }}</a>
-        </td>
-        <td>{{ auditoria.usuario }}</td>
-        <td>{{ auditoria.fecha|date:"d/m/Y" }}</td>
-        <td>{{ auditoria.hora }}</td>
-        <td>{{ auditoria.tipo }}</td>
-
-      </tr>
-      {% endfor %}
-    </tbody>
-    
-  </table>
+  {% if elementos %}
+    <table class="table table-hover text-nowrap">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Sec</th>
+          <th>Usuario</th>
+          <th>Fecha</th>
+          <th>Hora</th>
+          <th>Tipo</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for auditoria in elementos %}
+          {% if auditoria.usuario == user.document %}
+            <tr>
+              <td>{{ forloop.counter }}</td>
+              <td>
+                <a href="{% url 'auditoria_edit' auditoria.id %}">{{ auditoria.sec }}</a>
+              </td>
+              <td>{{ auditoria.usuario }}</td>
+              <td>{{ auditoria.fecha|date:"d/m/Y" }}</td>
+              <td>{{ auditoria.hora }}</td>
+              <td>{{ auditoria.tipo }}</td>
+            </tr>
+          {% endif %}
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No se encontraron elementos.</p>
   {% endif %}
 </div>
 {% endblock tabla %}
+

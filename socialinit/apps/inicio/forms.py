@@ -4,11 +4,16 @@ from allauth.account.models import EmailAddress
 from allauth.socialaccount.models import SocialAccount
 from apps.usuarios.models import CustomUser
 
+import datetime
+
 class CustomSignupForm(SignupForm):
     first_name = forms.CharField(max_length=30, label='First Name')
     last_name = forms.CharField(max_length=30, label='Last Name')
     telefono = forms.CharField(max_length=15, required=False, label='Telefono')
     document = forms.CharField(max_length=50, required=False, label='Documento')
+    direccion = forms.CharField(max_length=30, label='Direccion', required=True)
+    esResidente = forms.BooleanField()
+    
     def __init__(self, *args, **kwargs):
         super(CustomSignupForm, self).__init__(*args, **kwargs)
         # Excluir el campo 'username' del formulario
@@ -68,5 +73,8 @@ class CustomSignupForm(SignupForm):
         user.last_name = self.cleaned_data['last_name']
         user.telefono = self.cleaned_data.get('telefono')
         user.document = self.cleaned_data.get('document')
+        user.direccion = self.cleaned_data.get('direccion')
+        user.esResidente = self.cleaned_data.get('esResidente')
+        user.fecact = datetime.datetime.now()
         user.save()
         return user

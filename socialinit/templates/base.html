@@ -170,6 +170,7 @@
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
             
+            {% if not user.esResidente%}
             <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
                   <i class="nav-icon fas fa-edit"></i>
@@ -325,9 +326,154 @@
                   </li>
               </ul>
           </li>
-                    
+          {% else %}
             
-            
+                <li class="nav-item">
+                    <a href="{% url 'auditoria_create' %}" class="nav-link activate">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Auditoria</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'bancos_create' %}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Bancos</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'conceptos_gastos_create' %}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Conceptos Gastos</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'conceptos_otros_create' %}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Conceptos Otros</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'cartera_create' %}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Cartera</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'cuentas_bancarias_create' %}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Cuentas Bancarias</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'cuotas_extras_create' %}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Cuotas Extras</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'detalle_gas_create' %}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Detalle Gas</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'detalle_rec_create' %}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Detalle Rec</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'ext_inm_create' %}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Ext Inm</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'facturas_create' %}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Facturas</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'gastos_create' %}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Gastos</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'inm_ter_create' %}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Inm Ter</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'inmuebles_create' %}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Inmuebles</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'multas_create' %}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Multas</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'novedades_create' %}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Novedades</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'notas_create' %}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Notas</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'otron_im_create' %}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Otro Inm</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'parametrizacion_create' %}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Parametrizacion</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'recaudos_create' %}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Recaudos</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'tar_inm_create' %}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Tar Inm</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'tarifas_create' %}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Tarifas</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'tipo_documento_create' %}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Tipo Documento</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'terceros_create' %}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Terceros</p>
+                    </a>
+                </li>
+              {% endif %}
+              
           </ul>
         </nav>
         <!-- /.sidebar-menu -->
